@@ -1,0 +1,29 @@
+$mq_mobile: 750px;
+
+body {
+    margin: 0;
+    border: 30px solid $colour_red;
+  }
+  
+* {
+    font-family: 'VT323', sans-serif;
+    font-size: 20px;
+    color: $colour_darkgrey;
+  }
+
+
+  h1 {
+    font-size: 35px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 25px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }

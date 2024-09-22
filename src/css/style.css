@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&family=VT323&display=swap");
+body {
+  margin: 0;
+  border: 30px solid #e4000f;
+}
+
+* {
+  font-family: "VT323", sans-serif;
+  font-size: 20px;
+  color: #2e2e2e;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr 2fr 1fr;
+  grid-template-areas: "introduction" "menu" "teamgenerator" "footer";
+}
+.App .Introduction {
+  grid-area: introduction;
+}
+.App .Menu {
+  grid-area: menu;
+}
+.App .Teamgenerator {
+  grid-area: teamgenerator;
+}
+.App footer {
+  grid-area: footer;
+}
+@media (min-width: 750px) {
+  .App {
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-areas: "introduction introduction" "menu teamgenerator" "footer footer";
+  }
+}/*# sourceMappingURL=style.css.map */

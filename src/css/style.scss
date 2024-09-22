@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&family=VT323&display=swap');
+@import "./colours", "./defaults";
+
+.App {
+
+  display: grid;
+
+  .Introduction {
+    grid-area: introduction;
+  }
+
+  .Menu {
+    grid-area: menu;
+  }
+
+  .Teamgenerator {
+    grid-area: teamgenerator;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+
+  @media (min-width: $mq_mobile) {
+    grid-template-columns: 0.5fr 1.5fr; 
+    grid-template-rows: 1fr 2fr 1fr; 
+    grid-template-areas: 
+    "introduction introduction"
+    "menu teamgenerator"
+    "footer footer"; 
+  }
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.5fr 1fr 2fr 1fr; 
+    grid-template-areas: 
+    "introduction"
+    "menu"
+    "teamgenerator"
+    "footer"; 
+    
+}

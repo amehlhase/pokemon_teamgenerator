@@ -1,9 +1,141 @@
-import "./style.css";
-
 function App() {
   return (
     <div className="App">
-      <p>Content</p>
+      <section className="Introduction">
+        <h1>Pokémon Team Generator</h1>
+        <p>
+          Hi, you have no idea how to put together a great Pokémon team? I got
+          you.
+          <br />
+          Choose your favourite Pokémon, the Pokémon edition you're playing
+          and/or your favourite types and this app generates a banging team for
+          you.
+        </p>
+      </section>
+
+      <section className="Menu">
+        <input type="search" placeholder="Search Pokémon" />
+        {/* https://plainenglish.io/blog/how-to-implement-a-search-bar-in-react-js */}
+        <input type="button" value="Random Pokémon" />
+
+        <div className="PokemonChoice">
+          <img src="tbd" alt="tbd"></img>
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+        </div>
+        <input type="button" value="Add to team" />
+        <input type="button" value="Evolve choice" />
+
+        <label htmlFor="">
+          Edition:
+          {/* https://react.dev/reference/react-dom/components/select#providing-a-label-for-a-select-box */}
+          <select name="">
+            <option value="">Red</option>
+            <option value="">Blue</option>
+            <option value="">Yellow</option>
+            <option value="">Gold</option>
+            <option value="">Silver</option>
+            <option value="">Crystal</option>
+            <option value="">Ruby</option>
+            <option value="">Sapphire</option>
+            <option value="">FireRed</option>
+            <option value="">LeafGreen</option>
+            <option value="">Emerald</option>
+            <option value="">Diamond</option>
+            <option value="">Pearl</option>
+            <option value="">Platinum</option>
+            <option value="">HeartGold</option>
+            <option value="">SoulSilver</option>
+            <option value="">Black</option>
+            <option value="">White</option>
+            <option value="">Black 2</option>
+            <option value="">White 2</option>
+            <option value="">X</option>
+            <option value="">Y</option>
+            <option value="">Omega Ruby</option>
+            <option value="">Alpha Sapphire</option>
+            <option value="">Sun</option>
+            <option value="">Moon</option>
+            <option value="">Ultra Sun</option>
+            <option value="">Ultra Moon</option>
+            <option value="">Let's Go, Pikachu!</option>
+            <option value="">Let's Go, Eevee!</option>
+            <option value="">Sword</option>
+            <option value="">Shield</option>
+            <option value="">Brilliant Diamond</option>
+            <option value="">Shining Pearl</option>
+            <option value="">Legends: Arceus</option>
+            <option value="">Scarlet</option>
+            <option value="">Violet</option>
+          </select>
+        </label>
+
+        <label htmlFor="">Types (tbd)</label>
+        {/* https://react.tips/checkboxes-in-react-16/ */}
+
+        <button>Generate team!</button>
+      </section>
+
+      <section className="Teamgenerator">
+        <h2>Your team</h2>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <div>
+          <img src="tbd" alt="tbd" />
+          <span>Name & ID</span>
+          <span>Types(s)</span>
+          <button>Evolve</button>
+          <button>Remove</button>
+        </div>
+        <button>Generate new</button>
+      </section>
+
+      <footer>
+        This app was created using{" "}
+        <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
+          PokéAPI
+        </a>
+        . It's a private project by{" "}
+        <a href="https://github.com/amehlhase" target="_blank" rel="noreferrer">
+          Anja Mehlhase
+        </a>{" "}
+        and is not affiliated with "The Pokémon Company"! I don't claim any
+        rights to a Nintendo trademark or the Pokémon trademark. I just love
+        Pokémon and wanted to build something fun and useful.
+      </footer>
     </div>
   );
 }
