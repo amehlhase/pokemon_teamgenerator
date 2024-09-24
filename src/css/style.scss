@@ -3,12 +3,6 @@
 
 .App {
 
-  .GenerateButton {
-    display: block;
-    margin: 0 auto;
-    
-  }
-
   // Grid Design:
 
   display: grid;
@@ -31,7 +25,7 @@
 
   @media (min-width: $mq_mobile) {
     grid-template-columns: 0.5fr 1.5fr; 
-    grid-template-rows: 0.8fr 3fr 1fr; 
+    grid-template-rows: 1fr 2fr 1fr; 
     grid-template-areas: 
     "introduction introduction"
     "pokemonchoice teamgenerator"
@@ -42,7 +36,7 @@
     }
   }
     grid-template-columns: 1fr; 
-    grid-template-rows: 0.5fr 1fr 2fr 0.5fr; 
+    grid-template-rows: 0.5fr 1fr 2fr 0.3fr; 
     grid-template-areas: 
     "introduction"
     "pokemonchoice"
@@ -52,22 +46,25 @@
 
     // Introduction Design
 
-    p {
-      text-align: center;
+    .Introduction {
+
       margin: 10px;
+
+        p {
+          text-align: center;
+          padding: 10px;
+        }
     }
-
-
-    // Pokémon Choice / Menu Design
+    
+    // Pokémon Choice Design
 
     .Pokemonchoice {
 
       padding: 10px;
 
-      img {
-        width: 150px;
-      }
-
+        img {
+          width: 150px;
+        }
     }
 
     // Teamgenerator Design
@@ -79,9 +76,23 @@
       .Teamcards {
 
         display: flex;
+        flex-flow: wrap;
         justify-content: center;
         align-items: baseline;
         margin: 10px;
+
+          @media (min-width: $mq_mobile) {
+            hr {
+              width: 100%;
+              border: 0;
+            }
+          }
+          
+          @media (max-width: $mq_mobile) {
+            hr {
+              display: none;
+            }
+          }
 
         .Teamcard {
           margin: 10px;
@@ -103,7 +114,12 @@
           padding: 10px;
       }
     }
-   
 
+    // General Styling
+   
+    .GenerateButton {
+      display: block;
+      margin: 0 auto;
+    }
     
 }

@@ -121,6 +121,7 @@ function App() {
             <button>Evolve</button>
             <button>Remove</button>
           </div>
+          <hr></hr>
           <div className="Teamcard">
             <img src="tbd" alt="tbd" />
             <br />
