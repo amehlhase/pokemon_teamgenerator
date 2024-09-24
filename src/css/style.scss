@@ -3,14 +3,22 @@
 
 .App {
 
+  .GenerateButton {
+    display: block;
+    margin: 0 auto;
+    
+  }
+
+  // Grid Design:
+
   display: grid;
 
   .Introduction {
     grid-area: introduction;
   }
 
-  .Menu {
-    grid-area: menu;
+  .Pokemonchoice {
+    grid-area: pokemonchoice;
   }
 
   .Teamgenerator {
@@ -23,18 +31,79 @@
 
   @media (min-width: $mq_mobile) {
     grid-template-columns: 0.5fr 1.5fr; 
-    grid-template-rows: 1fr 2fr 1fr; 
+    grid-template-rows: 0.8fr 3fr 1fr; 
     grid-template-areas: 
     "introduction introduction"
-    "menu teamgenerator"
+    "pokemonchoice teamgenerator"
     "footer footer"; 
+
+    .Pokemonchoice {
+      border-right: 3px dotted $colour_darkgrey;
+    }
   }
     grid-template-columns: 1fr; 
-    grid-template-rows: 0.5fr 1fr 2fr 1fr; 
+    grid-template-rows: 0.5fr 1fr 2fr 0.5fr; 
     grid-template-areas: 
     "introduction"
-    "menu"
+    "pokemonchoice"
     "teamgenerator"
     "footer"; 
+
+
+    // Introduction Design
+
+    p {
+      text-align: center;
+      margin: 10px;
+    }
+
+
+    // Pokémon Choice / Menu Design
+
+    .Pokemonchoice {
+
+      padding: 10px;
+
+      img {
+        width: 150px;
+      }
+
+    }
+
+    // Teamgenerator Design
+
+    .Teamgenerator {
+
+      padding: 10px;
+
+      .Teamcards {
+
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        margin: 10px;
+
+        .Teamcard {
+          margin: 10px;
+        }
+
+      }
+
+    }
+
+
+    // Footer Design 
+
+    footer {
+
+      margin: 10px;
+
+       p {
+          text-align: center;
+          padding: 10px;
+      }
+    }
+   
+
     
 }
