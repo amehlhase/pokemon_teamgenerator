@@ -1,21 +1,10 @@
+import Introduction from "./components/Introduction";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="App">
-      <section className="Introduction">
-        <h1>Pokémon Team Generator</h1>
-        <p>
-          Hi, you have no idea how to put together a great Pokémon team? I got
-          you. Choose your favourite Pokémon, the Pokémon edition you're playing
-          and/or your favourite types and this app generates a banging team for
-          you.
-          <br />
-          The suggestions will always be the basic Pokémon but if there's any
-          evolution available just push the evolve button. If the suggested team
-          isn't to your taste, you can generate a new one.
-          <br />
-          Have fun!
-        </p>
-      </section>
+      <Introduction />
 
       {/* #TODO: Local storage https://medium.com/@uurylmaz_62733/how-to-cache-data-in-react-local-storage-dd2992e053d8 */}
 
@@ -155,26 +144,7 @@ function App() {
         </div>
         <button className="GenerateButton">Generate new</button>
       </section>
-
-      <footer>
-        <p>
-          This app was created using{" "}
-          <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
-            PokéAPI
-          </a>
-          . It's a private project by{" "}
-          <a
-            href="https://github.com/amehlhase"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Anja Mehlhase
-          </a>{" "}
-          and is not affiliated with "The Pokémon Company"! I don't claim any
-          rights to a Nintendo trademark or the Pokémon trademark. I just love
-          Pokémon and wanted to create something fun and useful.
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
