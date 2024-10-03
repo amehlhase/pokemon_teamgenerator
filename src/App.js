@@ -1,14 +1,12 @@
 import Introduction from "./components/Introduction";
-import GetPokemonData from "./components/pokemon/GetPokemonData";
+// import GetPokemonData from "./components/pokemon/GetPokemonData";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="App">
-      <GetPokemonData />
+      {/* <GetPokemonData /> */}
       <Introduction />
-
-      {/* #TODO: Local storage https://medium.com/@uurylmaz_62733/how-to-cache-data-in-react-local-storage-dd2992e053d8 */}
 
       <section className="Pokemonchoice">
         <input type="search" placeholder="Search Pokémon" />
