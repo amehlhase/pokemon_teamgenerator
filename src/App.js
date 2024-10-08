@@ -1,15 +1,16 @@
 import Introduction from "./components/Introduction";
+import SearchbarAutocomplete from "./components/Searchbar";
 // import GetPokemonData from "./components/pokemon/GetPokemonData";
 import Footer from "./components/Footer";
+
+// GetPokemonData();
 
 function App() {
   return (
     <div className="App">
-      {/* <GetPokemonData /> */}
       <Introduction />
-
       <section className="Pokemonchoice">
-        <input type="search" placeholder="Search Pokémon" />
+        <SearchbarAutocomplete />
         <br />
         {/* https://plainenglish.io/blog/how-to-implement-a-search-bar-in-react-js */}
         <input type="button" value="Random Pokémon" />
