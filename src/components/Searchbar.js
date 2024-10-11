@@ -1,5 +1,6 @@
 import pokemonlist from "./pokemon/pokemonlist";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import GetPokemonData from "./pokemon/GetPokemonData";
 
 function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -11,11 +12,11 @@ export default function SearchbarAutocomplete() {
   };
 
   const handleOnHover = (result) => {
-    console.log(result);
+    // console.log(result);
   };
 
   const handleOnSelect = (item) => {
-    console.log(item);
+    GetPokemonData(item.name);
   };
 
   const handleOnFocus = () => {

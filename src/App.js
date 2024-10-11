@@ -1,9 +1,6 @@
 import Introduction from "./components/Introduction";
 import SearchbarAutocomplete from "./components/Searchbar";
-// import GetPokemonData from "./components/pokemon/GetPokemonData";
 import Footer from "./components/Footer";
-
-// GetPokemonData();
 
 function App() {
   return (
@@ -23,12 +20,12 @@ function App() {
           <span>Types(s)</span>
         </div>
         <input type="button" value="Add to team" />
-        <input type="button" value="Evolve choice" />
+        {/* <input type="button" value="Evolve choice" /> */}
         <br />
 
-        <label htmlFor="">
+        {/* <label htmlFor="">
           Edition:
-          {/* https://react.dev/reference/react-dom/components/select#providing-a-label-for-a-select-box */}
+         
           <select name="">
             <option value="">Red</option>
             <option value="">Blue</option>
@@ -69,13 +66,13 @@ function App() {
             <option value="">Violet</option>
           </select>
           <br />
-        </label>
+        </label> */}
 
         <label htmlFor="">Types (tbd)</label>
         <br />
         {/* https://react.tips/checkboxes-in-react-16/ */}
 
-        <button className="GenerateButton">Generate team!</button>
+        {/* <button className="GenerateButton">Generate team!</button> */}
       </section>
 
       <section className="Teamgenerator">

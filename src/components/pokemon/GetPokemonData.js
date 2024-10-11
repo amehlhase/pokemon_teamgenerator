@@ -1,52 +1,24 @@
-// import axios from "axios";
-import pokemonlist from "./pokemonlist.json";
+import axios from "axios";
 
 const url = "https://pokeapi.co/api/v2/pokemon/";
+const pokemondata = {
+  name: "",
+  id: null,
+  img: "",
+  firsttype: "",
+  secondtype: "",
+  evolution: "",
+};
 
-// #TODO: API Daten nur laden, wenn localStorage leer
-// API Daten dann in localStorage speichern (mit Zeitbegrenzung)
-// Daten exportieren und für Searchbar und Teamgenerator benutzen
+export default async function GetPokemonData(str) {
+  axios.get(url + str, {}).then((res) => {
+    const data = res.data;
+    pokemondata.name = data.name;
+    pokemondata.id = data.id;
+    pokemondata.img = data.sprites.front_default;
+    pokemondata.firsttype = data.types[0].type.name;
+    pokemondata.secondtype = data.types[1]?.type?.name ?? "none";
 
-//   GetPokemonData() {
-//     axios
-//       .get(`https://pokeapi.co/api/v2/pokemon/?offset=50&limit=1100`, {})
-//       .then((res) => {
-//         const data = res.data;
-//         console.log(data);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }
-
-//   componentDidMount() {
-//     this.GetPokemonData();
-//   }
-// }
-
-export default async function GetPokemonData() {
-  for (var pokemonname in pokemonlist) {
-    console.log(url + pokemonname);
-  }
-
-  // axios.get(url + pokemonname, {}).then((res) => {
-  //   const data = res.data;
-  //   console.log(data);
-  // });
-
-  // pokemondata = {
-  //   name: pokemonname,
-  //   // url: url + pokemonname,
-  // };
-  // console.log(pokemondata);
+    console.log(pokemondata);
+  });
 }
-
-// axios
-//       .get(url + pokemonname, {})
-//       .then((res) => {
-//         const data = res.data;
-//         // window.localStorage.setItem("Pokemon", JSON.stringify(data));
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
