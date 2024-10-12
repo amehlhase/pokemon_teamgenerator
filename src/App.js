@@ -1,6 +1,10 @@
 import Introduction from "./components/Introduction";
 import SearchbarAutocomplete from "./components/Searchbar";
 import Footer from "./components/Footer";
+import {
+  DisplayPokemon,
+  PickRandomPokemon,
+} from "./components/pokemon/GetPokemonData";
 
 function App() {
   return (
@@ -9,16 +13,14 @@ function App() {
       <section className="Pokemonchoice">
         <SearchbarAutocomplete />
         <br />
-        {/* https://plainenglish.io/blog/how-to-implement-a-search-bar-in-react-js */}
-        <input type="button" value="Random Pokémon" />
+        <input
+          type="button"
+          value="Random Pokémon"
+          onClick={PickRandomPokemon}
+        />
 
-        <div>
-          <img src="tbd" alt="tbd"></img>
-          <br />
-          <span>Name & ID</span>
-          <br />
-          <span>Types(s)</span>
-        </div>
+        <DisplayPokemon />
+        <br />
         <input type="button" value="Add to team" />
         {/* <input type="button" value="Evolve choice" /> */}
         <br />
