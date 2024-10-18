@@ -1,4 +1,4 @@
-function Introduction() {
+export default function Introduction() {
   return (
     <section className="Introduction">
       <h1>Pokémon Team Generator</h1>
@@ -17,5 +17,3 @@ function Introduction() {
     </section>
   );
 }
-
-export default Introduction;

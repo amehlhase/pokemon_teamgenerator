@@ -1,12 +1,102 @@
 import Introduction from "./components/Introduction";
-import SearchbarAutocomplete from "./components/Searchbar";
 import Footer from "./components/Footer";
-import {
-  DisplayPokemon,
-  PickRandomPokemon,
-} from "./components/pokemon/GetPokemonData";
+import { useState } from "react";
+import pokemonlist from "./components/pokemon/pokemonlist";
+import { Capitalize } from "./components/Helpers";
+import axios from "axios";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 function App() {
+  const [name, setName] = useState("pikachu");
+  const [number, setNumber] = useState(25);
+  const [image, setImage] = useState(
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+  );
+  const [firsttype, setFirsttype] = useState("electric");
+  const [secondtype, setSecondtype] = useState("");
+  // const [evolution, setEvolution] = useState(true);
+
+  function DisplayPokemon() {
+    return (
+      <div>
+        <img src={image} alt={Capitalize(name)}></img>
+        <br />
+        <span>
+          #{number} {Capitalize(name)}
+        </span>
+        <br />
+        <span>{firsttype} </span>
+        <span>{secondtype}</span>
+      </div>
+    );
+  }
+
+  function SearchbarAutocomplete() {
+    const handleOnSearch = (string, results) => {
+      // console.log(string, results);
+    };
+
+    const handleOnHover = (result) => {
+      // console.log(result);
+    };
+
+    const handleOnSelect = (item) => {
+      GetPokemonData(item.name);
+    };
+
+    const handleOnFocus = () => {
+      // console.log("Focused");
+    };
+
+    const formatResult = (item) => {
+      return (
+        <>
+          <span style={{ display: "block", textAlign: "left" }}>
+            #{item.id} {Capitalize(item.name)}
+          </span>
+        </>
+      );
+    };
+
+    return (
+      <ReactSearchAutocomplete
+        items={pokemonlist}
+        onSearch={handleOnSearch}
+        onHover={handleOnHover}
+        onSelect={handleOnSelect}
+        onFocus={handleOnFocus}
+        autoFocus
+        formatResult={formatResult}
+        placeholder="Search Pokemon"
+      />
+    );
+  }
+
+  function GetPokemonData(str) {
+    const url = "https://pokeapi.co/api/v2/pokemon/";
+
+    axios.get(url + str, {}).then((res) => {
+      const data = res.data;
+      setName(data.name);
+      setNumber(data.id);
+      setImage(data.sprites.front_default);
+      setFirsttype(data.types[0].type.name);
+      setSecondtype(data.types[1]?.type?.name ?? "");
+    });
+  }
+
+  function PickRandomPokemon() {
+    let result;
+    let keys = Object.keys(pokemonlist);
+    result = pokemonlist[keys[(keys.length * Math.random()) << 0]];
+    console.log(result.name);
+    GetPokemonData(result.name);
+
+    // setName((n) => ({
+    //   ...n, Capitalize(result.name),
+    // }));
+  }
+
   return (
     <div className="App">
       <Introduction />
