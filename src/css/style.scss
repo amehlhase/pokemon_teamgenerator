@@ -118,8 +118,15 @@
     // General Styling
    
     .GenerateButton {
+      font-weight: bold;
       display: block;
       margin: 0 auto;
+    }
+
+    .type {
+      margin: 3px 6px 3px 0;
+      padding: 3px 6px;
+      border-radius: 5px;
     }
     
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
 import { useState } from "react";
@@ -5,6 +6,8 @@ import pokemonlist from "./components/pokemon/pokemonlist";
 import { Capitalize } from "./components/Helpers";
 import axios from "axios";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import * as colours from "./components/pokemon/typecolours";
+import "./css/style.css";
 
 function App() {
   const [name, setName] = useState("pikachu");
@@ -16,6 +19,22 @@ function App() {
   const [secondtype, setSecondtype] = useState("");
   // const [evolution, setEvolution] = useState(true);
 
+  function DisplayTypeButtons() {
+    let bgcolourfirst = colours[firsttype];
+    let bgcoloursecond = colours[secondtype];
+
+    return (
+      <>
+        <span className="type" style={{ backgroundColor: bgcolourfirst }}>
+          {firsttype}
+        </span>
+        <span className="type" style={{ backgroundColor: bgcoloursecond }}>
+          {secondtype}
+        </span>
+      </>
+    );
+  }
+
   function DisplayPokemon() {
     return (
       <div>
@@ -25,8 +44,7 @@ function App() {
           #{number} {Capitalize(name)}
         </span>
         <br />
-        <span>{firsttype} </span>
-        <span>{secondtype}</span>
+        <DisplayTypeButtons />
       </div>
     );
   }
@@ -91,10 +109,6 @@ function App() {
     result = pokemonlist[keys[(keys.length * Math.random()) << 0]];
     console.log(result.name);
     GetPokemonData(result.name);
-
-    // setName((n) => ({
-    //   ...n, Capitalize(result.name),
-    // }));
   }
 
   return (
