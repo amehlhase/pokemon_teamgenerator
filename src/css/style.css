@@ -68,7 +68,7 @@ h4 {
   padding: 10px;
 }
 .App .Pokemonchoice img {
-  width: 150px;
+  width: 200px;
 }
 .App .Teamgenerator {
   padding: 10px;
@@ -93,6 +93,9 @@ h4 {
 }
 .App .Teamgenerator .Teamcards .Teamcard {
   margin: 15px;
+}
+.App .Teamgenerator .Teamcards .Teamcard img {
+  height: 170px;
 }
 .App footer {
   margin: 10px;

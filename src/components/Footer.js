@@ -6,7 +6,24 @@ export default function Footer() {
         <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
           PokéAPI
         </a>
-        . It's a private project by{" "}
+        . Pokéball image by{" "}
+        <a
+          href="https://pixabay.com/users/seducer-3063630/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1635610"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Darwin Bulos
+        </a>{" "}
+        from{" "}
+        <a
+          href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1635610"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Pixabay
+        </a>
+        . <br />
+        It's a private project by{" "}
         <a href="https://github.com/amehlhase" target="_blank" rel="noreferrer">
           Anja Mehlhase
         </a>{" "}

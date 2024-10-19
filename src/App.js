@@ -7,7 +7,9 @@ import { Capitalize } from "./components/Helpers";
 import axios from "axios";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import * as colours from "./components/pokemon/typecolours";
-import "./css/style.css";
+import pokeball from "./img/pokeball.png";
+
+// #TODO: Fehlermeldung für API 404 Error
 
 function App() {
   const [name, setName] = useState("pikachu");
@@ -19,9 +21,65 @@ function App() {
   const [secondtype, setSecondtype] = useState("");
   // const [evolution, setEvolution] = useState(true);
 
+  const [choice, setChoice] = useState({
+    name: "Make a choice",
+    number: 666,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+  });
+
+  function SetChoice() {
+    setChoice((c) => ({
+      ...c,
+      name: name,
+      number: number,
+      image: image,
+      firsttype: firsttype,
+      secondtype: secondtype,
+    }));
+  }
+
+  function RemoveChoice() {
+    setChoice((c) => ({
+      ...c,
+      name: "Make a choice",
+      number: 666,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    }));
+  }
+
+  function DisplayChoice() {
+    return (
+      <div className="Teamcard">
+        <img src={choice.image} alt={choice.name} />
+        <br />
+        <span>
+          #{choice.number} {Capitalize(choice.name)}
+        </span>
+        <br />
+        {/* #TODO: Typen korrekt darstellen */}
+        {/* <span
+          className="type"
+          style={{ backgroundColor: choice ? bgcolourfirst : "red" }}
+        >
+          {firsttype}
+        </span>
+        <span className="type" style={{ backgroundColor: bgcoloursecond }}>
+          {secondtype}
+        </span> */}
+        <br />
+        <button>Evolve</button>
+        <button onClick={RemoveChoice}>Remove</button>
+      </div>
+    );
+  }
+
   function DisplayTypeButtons() {
-    let bgcolourfirst = colours[firsttype];
-    let bgcoloursecond = colours[secondtype];
+    let bgcolourfirst = colours["colour_type_" + firsttype];
+    let bgcoloursecond = colours["colour_type_" + secondtype];
 
     return (
       <>
@@ -107,7 +165,7 @@ function App() {
     let result;
     let keys = Object.keys(pokemonlist);
     result = pokemonlist[keys[(keys.length * Math.random()) << 0]];
-    console.log(result.name);
+    // console.log(result.name);
     GetPokemonData(result.name);
   }
 
@@ -125,7 +183,7 @@ function App() {
 
         <DisplayPokemon />
         <br />
-        <input type="button" value="Add to team" />
+        <input type="button" value="Add to team" onClick={SetChoice} />
         {/* <input type="button" value="Evolve choice" /> */}
         <br />
 
@@ -184,16 +242,7 @@ function App() {
       <section className="Teamgenerator">
         <h2>Your team</h2>
         <div className="Teamcards">
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
+          <DisplayChoice />
           <div className="Teamcard">
             <img src="tbd" alt="tbd" />
             <br />
