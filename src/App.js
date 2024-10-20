@@ -109,7 +109,11 @@ function App() {
   function DisplayChoice() {
     return (
       <div className="Teamcard">
-        <img src={choice.image} alt={choice.name} />
+        <img
+          src={choice.image}
+          alt={choice.name}
+          className={choice.selected ? "pokemon" : "pokeball"}
+        />
         <br />
         <span>
           #{choice.number} {Capitalize(choice.name)}
@@ -135,7 +139,11 @@ function App() {
   function DisplaySecondchoice() {
     return (
       <div className="Teamcard">
-        <img src={secondchoice.image} alt={secondchoice.name} />
+        <img
+          src={secondchoice.image}
+          alt={secondchoice.name}
+          className={secondchoice.selected ? "pokemon" : "pokeball"}
+        />
         <br />
         <span>
           #{secondchoice.number} {Capitalize(secondchoice.name)}

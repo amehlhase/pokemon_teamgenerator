@@ -94,22 +94,29 @@ h4 {
 .App .Teamgenerator .Teamcards .Teamcard {
   margin: 15px;
 }
-.App .Teamgenerator .Teamcards .Teamcard img {
-  height: 170px;
+.App .Teamgenerator .Teamcards .Teamcard img.pokeball {
+  height: 100px;
+  opacity: 50%;
 }
-.App footer {
+.App .Teamgenerator .Teamcards .Teamcard img.pokemon {
+  height: 200px;
+}
+
+footer {
   margin: 10px;
 }
-.App footer p {
+footer p {
   text-align: center;
   padding: 10px;
 }
-.App .GenerateButton {
+
+.GenerateButton {
   font-weight: bold;
   display: block;
   margin: 0 auto;
 }
-.App .type {
+
+.type {
   margin: 3px 6px 3px 0;
   padding: 3px 6px;
   border-radius: 5px;

@@ -96,8 +96,18 @@
 
         .Teamcard {
           margin: 15px;
-          img {
-            height: 170px;
+
+          // #TODO: Cards stylen und korrekt ausrichten
+
+          img.pokeball {
+              height: 100px;
+              opacity: 50%;
+            }
+
+          img.pokemon {
+              height: 200px;
+            }
+            
           }
         }
 
@@ -132,4 +142,3 @@
       border-radius: 5px;
     }
     
-}
