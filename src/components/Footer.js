@@ -8,19 +8,11 @@ export default function Footer() {
         </a>
         . Pokéball image by{" "}
         <a
-          href="https://pixabay.com/users/seducer-3063630/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1635610"
+          href="https://www.freeiconspng.com/img/45332"
           target="_blank"
           rel="noreferrer"
         >
-          Darwin Bulos
-        </a>{" "}
-        from{" "}
-        <a
-          href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1635610"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Pixabay
+          Ahkâm
         </a>
         . <br />
         It's a private project by{" "}

@@ -23,31 +23,86 @@ function App() {
 
   const [choice, setChoice] = useState({
     name: "Make a choice",
-    number: 666,
+    number: 0,
     image: pokeball,
     firsttype: "",
     secondtype: "",
+    selected: false,
   });
 
-  function SetChoice() {
-    setChoice((c) => ({
-      ...c,
-      name: name,
-      number: number,
-      image: image,
-      firsttype: firsttype,
-      secondtype: secondtype,
-    }));
+  const [secondchoice, setSecondchoice] = useState({
+    name: "Make a choice",
+    number: 0,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+    selected: false,
+  });
+
+  function SelectChoice() {
+    !choice.selected
+      ? setChoice((c) => ({
+          ...c,
+          name: name,
+          number: number,
+          image: image,
+          firsttype: firsttype,
+          secondtype: secondtype,
+          selected: true,
+        }))
+      : setSecondchoice((s) => ({
+          ...s,
+          name: name,
+          number: number,
+          image: image,
+          firsttype: firsttype,
+          secondtype: secondtype,
+          selected: true,
+        }));
   }
 
-  function RemoveChoice() {
-    setChoice((c) => ({
-      ...c,
+  function RemoveFirstchoice() {
+    if (secondchoice.selected) {
+      setChoice((c) => ({
+        ...c,
+        name: secondchoice.name,
+        number: secondchoice.number,
+        image: secondchoice.image,
+        firsttype: secondchoice.firsttype,
+        secondtype: secondchoice.secondtype,
+        selected: true,
+      }));
+      setSecondchoice((s) => ({
+        ...s,
+        name: "Make a choice",
+        number: 0,
+        image: pokeball,
+        firsttype: "",
+        secondtype: "",
+        selected: false,
+      }));
+    } else {
+      setChoice((c) => ({
+        ...c,
+        name: "Make a choice",
+        number: 0,
+        image: pokeball,
+        firsttype: "",
+        secondtype: "",
+        selected: false,
+      }));
+    }
+  }
+
+  function RemoveSecondchoice() {
+    setSecondchoice((s) => ({
+      ...s,
       name: "Make a choice",
-      number: 666,
+      number: 0,
       image: pokeball,
       firsttype: "",
       secondtype: "",
+      selected: false,
     }));
   }
 
@@ -72,7 +127,23 @@ function App() {
         </span> */}
         <br />
         <button>Evolve</button>
-        <button onClick={RemoveChoice}>Remove</button>
+        <button onClick={RemoveFirstchoice}>Remove</button>
+      </div>
+    );
+  }
+
+  function DisplaySecondchoice() {
+    return (
+      <div className="Teamcard">
+        <img src={secondchoice.image} alt={secondchoice.name} />
+        <br />
+        <span>
+          #{secondchoice.number} {Capitalize(secondchoice.name)}
+        </span>
+        <br />
+        <br />
+        <button>Evolve</button>
+        <button onClick={RemoveSecondchoice}>Remove</button>
       </div>
     );
   }
@@ -183,7 +254,7 @@ function App() {
 
         <DisplayPokemon />
         <br />
-        <input type="button" value="Add to team" onClick={SetChoice} />
+        <input type="button" value="Add to team" onClick={SelectChoice} />
         {/* <input type="button" value="Evolve choice" /> */}
         <br />
 
@@ -232,8 +303,8 @@ function App() {
           <br />
         </label> */}
 
-        <label htmlFor="">Types (tbd)</label>
-        <br />
+        {/* <label htmlFor="">Types (tbd)</label> */}
+
         {/* https://react.tips/checkboxes-in-react-16/ */}
 
         {/* <button className="GenerateButton">Generate team!</button> */}
@@ -243,16 +314,7 @@ function App() {
         <h2>Your team</h2>
         <div className="Teamcards">
           <DisplayChoice />
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
+          <DisplaySecondchoice />
           <div className="Teamcard">
             <img src="tbd" alt="tbd" />
             <br />
