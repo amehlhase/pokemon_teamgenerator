@@ -39,6 +39,42 @@ function App() {
     selected: false,
   });
 
+  const [thirdchoice, setThirdchoice] = useState({
+    name: "",
+    number: 0,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+    selected: false,
+  });
+
+  const [fourthchoice, setFourthchoice] = useState({
+    name: "",
+    number: 0,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+    selected: false,
+  });
+
+  const [fifthchoice, setFifthchoice] = useState({
+    name: "",
+    number: 0,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+    selected: false,
+  });
+
+  const [sixthchoice, setSixthchoice] = useState({
+    name: "",
+    number: 0,
+    image: pokeball,
+    firsttype: "",
+    secondtype: "",
+    selected: false,
+  });
+
   function SelectChoice() {
     !choice.selected
       ? setChoice((c) => ({
@@ -115,9 +151,10 @@ function App() {
           className={choice.selected ? "pokemon" : "pokeball"}
         />
         <br />
-        <span>
-          #{choice.number} {Capitalize(choice.name)}
+        <span className={choice.number === 0 ? "hidden" : ""}>
+          #{choice.number}
         </span>
+        <span> {Capitalize(choice.name)}</span>
         <br />
         {/* #TODO: Typen korrekt darstellen */}
         {/* <span
@@ -145,14 +182,79 @@ function App() {
           className={secondchoice.selected ? "pokemon" : "pokeball"}
         />
         <br />
-        <span>
-          #{secondchoice.number} {Capitalize(secondchoice.name)}
+        <span className={secondchoice.number === 0 ? "hidden" : ""}>
+          #{secondchoice.number}
         </span>
+        <span> {Capitalize(secondchoice.name)}</span>
         <br />
         <br />
         <button>Evolve</button>
         <button onClick={RemoveSecondchoice}>Remove</button>
       </div>
+    );
+  }
+
+  function DisplayGeneratedTeam() {
+    return (
+      <>
+        <div className="Teamcard">
+          <img
+            src={thirdchoice.image}
+            alt={thirdchoice.name}
+            className={thirdchoice.selected ? "pokemon" : "pokeball"}
+          />
+          <br />
+          <span className={thirdchoice.number === 0 ? "hidden" : ""}>
+            #{thirdchoice.number}
+          </span>
+          <span> {Capitalize(thirdchoice.name)}</span>
+          <br />
+          <br />
+        </div>
+        <hr></hr>
+        <div className="Teamcard">
+          <img
+            src={fourthchoice.image}
+            alt={fourthchoice.name}
+            className={fourthchoice.selected ? "pokemon" : "pokeball"}
+          />
+          <br />
+          <span className={fourthchoice.number === 0 ? "hidden" : ""}>
+            #{fourthchoice.number}
+          </span>
+          <span> {Capitalize(fourthchoice.name)}</span>
+          <br />
+          <br />
+        </div>
+        <div className="Teamcard">
+          <img
+            src={fifthchoice.image}
+            alt={fifthchoice.name}
+            className={fifthchoice.selected ? "pokemon" : "pokeball"}
+          />
+          <br />
+          <span className={fifthchoice.number === 0 ? "hidden" : ""}>
+            #{fifthchoice.number}
+          </span>
+          <span> {Capitalize(fifthchoice.name)}</span>
+          <br />
+          <br />
+        </div>
+        <div className="Teamcard">
+          <img
+            src={sixthchoice.image}
+            alt={sixthchoice.name}
+            className={sixthchoice.selected ? "pokemon" : "pokeball"}
+          />
+          <br />
+          <span className={sixthchoice.number === 0 ? "hidden" : ""}>
+            #{sixthchoice.number}
+          </span>
+          <span> {Capitalize(sixthchoice.name)}</span>
+          <br />
+          <br />
+        </div>
+      </>
     );
   }
 
@@ -229,7 +331,6 @@ function App() {
 
   function GetPokemonData(str) {
     const url = "https://pokeapi.co/api/v2/pokemon/";
-
     axios.get(url + str, {}).then((res) => {
       const data = res.data;
       setName(data.name);
@@ -244,8 +345,80 @@ function App() {
     let result;
     let keys = Object.keys(pokemonlist);
     result = pokemonlist[keys[(keys.length * Math.random()) << 0]];
-    // console.log(result.name);
+
     GetPokemonData(result.name);
+  }
+
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function GenerateTeam() {
+    let result = [];
+    let types = [
+      "bug",
+      "dark",
+      "dragon",
+      "electric",
+      "fairy",
+      "fighting",
+      "fire",
+      "flying",
+      "ghost",
+      "grass",
+      "ground",
+      "ice",
+      "normal",
+      "poison",
+      "psychic",
+      "rock",
+      "steel",
+      "water",
+    ];
+
+    if (choice.number !== 0) {
+      types = types.filter(function (e) {
+        return e !== choice.firsttype;
+      });
+      if (secondchoice.number !== 0) {
+        types = types.filter(function (e) {
+          return e !== secondchoice.firsttype;
+        });
+        result.push(shuffleArray(types).slice(0, 4));
+      } else {
+        result.push(shuffleArray(types).slice(0, 5));
+      }
+    }
+    // types.splice(types, types.indexOf(choice.firsttype));
+
+    console.log(result);
+
+    // let values = Object.values(types);
+
+    // for (let i = 0; i < 4; i++) {
+    //   result.push(types[Math.floor(Math.random() * 17)]);
+    //   console.log(`https://pokeapi.co/api/v2/type/` + result[i] + "/");
+    // }
+
+    // function mutableSample(arr, n) {
+    //   for (let i = 0; i < n; i++) {
+    //     const randomIndex = Math.floor(Math.random() * arr.length);
+    //     output.push(arr[randomIndex]);
+    //     arr.splice(randomIndex, 1);
+    //   }
+    //   return output;
+    // }
+
+    // mutableSample(types, 18);
+
+    // console.log(`https://pokeapi.co/api/v2/type/` + result[0] + "/");
+
+    // console.log(choice.firsttype);
+    // console.log(secondchoice.firsttype);
   }
 
   return (
@@ -323,49 +496,11 @@ function App() {
         <div className="Teamcards">
           <DisplayChoice />
           <DisplaySecondchoice />
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
-          <hr></hr>
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
-          <div className="Teamcard">
-            <img src="tbd" alt="tbd" />
-            <br />
-            <span>Name & ID</span>
-            <br />
-            <span>Types(s)</span>
-            <br />
-            <button>Evolve</button>
-            <button>Remove</button>
-          </div>
+          <DisplayGeneratedTeam />
         </div>
-        <button className="GenerateButton">Generate new</button>
+        <button className="GenerateButton" onClick={GenerateTeam}>
+          Generate new
+        </button>
       </section>
       <Footer />
     </div>

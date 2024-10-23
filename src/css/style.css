@@ -95,7 +95,7 @@ h4 {
   margin: 15px;
 }
 .App .Teamgenerator .Teamcards .Teamcard img.pokeball {
-  height: 100px;
+  height: 80px;
   opacity: 50%;
 }
 .App .Teamgenerator .Teamcards .Teamcard img.pokemon {
@@ -120,4 +120,8 @@ footer p {
   margin: 3px 6px 3px 0;
   padding: 3px 6px;
   border-radius: 5px;
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

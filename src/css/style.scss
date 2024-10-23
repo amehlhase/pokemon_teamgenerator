@@ -100,7 +100,7 @@
           // #TODO: Cards stylen und korrekt ausrichten
 
           img.pokeball {
-              height: 100px;
+              height: 80px;
               opacity: 50%;
             }
 
@@ -142,3 +142,7 @@
       border-radius: 5px;
     }
     
+
+    .hidden {
+      display: none;
+    }
