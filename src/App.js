@@ -351,7 +351,7 @@ function App() {
     GetPokemonData(result.name);
   }
 
-  function shuffleTypes() {
+  function getTypeUrls() {
     let types = [
       "bug",
       "dark",
@@ -400,22 +400,51 @@ function App() {
     return typeurls;
   }
 
-  function GenerateTeam() {
-    shuffleTypes();
-
-    // setPokemonurls([]);
-
+  function getPokemonurls() {
     for (let i = 0; i < typeurls.length; i++) {
       axios.get(typeurls[i], {}).then((res) => {
         const data = res.data;
-
-        pokemonurls.push(data.pokemon[0].pokemon.url);
-        // setPokemonurls((p) => [...p, data.pokemon[0].pokemon.url]);
-
-        // console.log(data.pokemon.length);
+        const random = Math.floor(
+          Math.random() * (data.pokemon.length - 0 + 1) + 0
+        );
+        pokemonurls.push(data.pokemon[random].pokemon.url);
       });
     }
+
     console.log(pokemonurls);
+
+    return pokemonurls;
+  }
+
+  function GenerateTeam() {
+    typeurls = [];
+    pokemonurls = [];
+    getTypeUrls();
+    getPokemonurls();
+
+    // for (let i = 0; i < pokemonurls.length; i++) {
+    //   axios.get(pokemonurls[i], {}).then((res) => {
+    //     const data = res.data;
+    //     console.log(data);
+
+    //     // setName(data.name);
+    //     // setNumber(data.id);
+    //     // setImage(data.sprites.front_default);
+    //     // setFirsttype(data.types[0].type.name);
+    //     // setSecondtype(data.types[1]?.type?.name ?? "");
+    //   });
+
+    //   // if(pokemonurls.length > 4) {
+    //   //   setSecondchoice((s) => ({
+    //   //     ...s,
+    //   //     name: ,
+    //   //     number: 0,
+    //   //     image: pokeball,
+    //   //     firsttype: "",
+    //   //     secondtype: "",
+    //   //     selected: false,
+    //   //   }));
+    // }
   }
 
   return (
