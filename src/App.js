@@ -3,7 +3,7 @@ import Introduction from "./components/Introduction";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import pokemonlist from "./components/pokemon/pokemonlist";
-import { Capitalize } from "./components/Helpers";
+import { Capitalize, shuffleArray } from "./components/Helpers";
 import axios from "axios";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import * as colours from "./components/pokemon/typecolours";
@@ -12,6 +12,8 @@ import pokeball from "./img/pokeball.png";
 // #TODO: Fehlermeldung für API 404 Error
 
 function App() {
+  let typeurls = [];
+  let pokemonurls = [];
   const [name, setName] = useState("pikachu");
   const [number, setNumber] = useState(25);
   const [image, setImage] = useState(
@@ -349,16 +351,7 @@ function App() {
     GetPokemonData(result.name);
   }
 
-  function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  function GenerateTeam() {
-    let result = [];
+  function shuffleTypes() {
     let types = [
       "bug",
       "dark",
@@ -379,12 +372,14 @@ function App() {
       "steel",
       "water",
     ];
+    let result = [];
+    const url = "https://pokeapi.co/api/v2/type/";
 
-    if (choice.number !== 0) {
+    if (choice.selected) {
       types = types.filter(function (e) {
         return e !== choice.firsttype;
       });
-      if (secondchoice.number !== 0) {
+      if (secondchoice.selected) {
         types = types.filter(function (e) {
           return e !== secondchoice.firsttype;
         });
@@ -393,32 +388,34 @@ function App() {
         result.push(shuffleArray(types).slice(0, 5));
       }
     }
-    // types.splice(types, types.indexOf(choice.firsttype));
 
-    console.log(result);
+    if (result[0]) {
+      for (let i = 0; i < result[0].length; i++) {
+        typeurls.push(url + result[0][i]);
+      }
+    } else {
+      window.alert("Please choose at least one Pokémon :)");
+    }
 
-    // let values = Object.values(types);
+    return typeurls;
+  }
 
-    // for (let i = 0; i < 4; i++) {
-    //   result.push(types[Math.floor(Math.random() * 17)]);
-    //   console.log(`https://pokeapi.co/api/v2/type/` + result[i] + "/");
-    // }
+  function GenerateTeam() {
+    shuffleTypes();
 
-    // function mutableSample(arr, n) {
-    //   for (let i = 0; i < n; i++) {
-    //     const randomIndex = Math.floor(Math.random() * arr.length);
-    //     output.push(arr[randomIndex]);
-    //     arr.splice(randomIndex, 1);
-    //   }
-    //   return output;
-    // }
+    // setPokemonurls([]);
 
-    // mutableSample(types, 18);
+    for (let i = 0; i < typeurls.length; i++) {
+      axios.get(typeurls[i], {}).then((res) => {
+        const data = res.data;
 
-    // console.log(`https://pokeapi.co/api/v2/type/` + result[0] + "/");
+        pokemonurls.push(data.pokemon[0].pokemon.url);
+        // setPokemonurls((p) => [...p, data.pokemon[0].pokemon.url]);
 
-    // console.log(choice.firsttype);
-    // console.log(secondchoice.firsttype);
+        // console.log(data.pokemon.length);
+      });
+    }
+    console.log(pokemonurls);
   }
 
   return (
