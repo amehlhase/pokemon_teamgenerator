@@ -13,7 +13,7 @@ import pokeball from "./img/pokeball.png";
 
 function App() {
   let typeurls = [];
-  let pokemonurls = [];
+  const [pokemonurls, setPokemonurls] = useState([]);
   const [name, setName] = useState("pikachu");
   const [number, setNumber] = useState(25);
   const [image, setImage] = useState(
@@ -22,6 +22,8 @@ function App() {
   const [firsttype, setFirsttype] = useState("electric");
   const [secondtype, setSecondtype] = useState("");
   // const [evolution, setEvolution] = useState(true);
+
+  const [pokemonarray, setPokemonarray] = useState([]);
 
   const [choice, setChoice] = useState({
     name: "Make a choice",
@@ -352,6 +354,7 @@ function App() {
   }
 
   function getTypeUrls() {
+    typeurls = [];
     let types = [
       "bug",
       "dark",
@@ -381,7 +384,7 @@ function App() {
       });
       if (secondchoice.selected) {
         types = types.filter(function (e) {
-          return e !== secondchoice.firsttype;
+          return e !== secondchoice.firsttype && choice.firsttype;
         });
         result.push(shuffleArray(types).slice(0, 4));
       } else {
@@ -404,23 +407,26 @@ function App() {
     for (let i = 0; i < typeurls.length; i++) {
       axios.get(typeurls[i], {}).then((res) => {
         const data = res.data;
-        const random = Math.floor(
-          Math.random() * (data.pokemon.length - 0 + 1) + 0
-        );
+        const random = Math.floor(Math.random() * data.pokemon.length);
         pokemonurls.push(data.pokemon[random].pokemon.url);
+        // #TODO: parsed is undefined
+        // #TODO: Daten einzelner Pokemon speichern
+        // count? useEffect mit count bis i erreicht?
+        // axios.get(pokemonurls[i]).then((res) => {
+        //   const pokemondata = res.data;
+        //   setPokemonarray([...pokemonarray, { name: pokemondata.name }]);
+        // });
       });
     }
-
-    console.log(pokemonurls);
-
-    return pokemonurls;
   }
 
   function GenerateTeam() {
-    typeurls = [];
-    pokemonurls = [];
+    setPokemonurls([]);
+    setPokemonarray([]);
     getTypeUrls();
     getPokemonurls();
+
+    console.log(pokemonarray);
 
     // for (let i = 0; i < pokemonurls.length; i++) {
     //   axios.get(pokemonurls[i], {}).then((res) => {
