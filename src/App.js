@@ -34,17 +34,9 @@ function App() {
     selected: false,
   });
 
-  // const [secondchoice, setSecondchoice] = useState({
-  //   name: "Make a choice",
-  //   number: 0,
-  //   image: pokeball,
-  //   firsttype: "",
-  //   secondtype: "",
-  //   selected: false,
-  // });
-
   let initialTeam = [
     {
+      id: 0,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -52,6 +44,7 @@ function App() {
       secondtype: "",
     },
     {
+      id: 1,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -59,6 +52,7 @@ function App() {
       secondtype: "",
     },
     {
+      id: 2,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -66,6 +60,7 @@ function App() {
       secondtype: "",
     },
     {
+      id: 3,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -73,6 +68,7 @@ function App() {
       secondtype: "",
     },
     {
+      id: 4,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -107,30 +103,27 @@ function App() {
     }));
   }
 
-  function DisplayChoice() {
+  function DisplayChoice({
+    name,
+    image,
+    number,
+    firsttype,
+    secondtype,
+    selected,
+  }) {
     return (
       <div className="Teamcard">
         <img
-          src={choice.image}
-          alt={choice.name}
-          className={choice.selected ? "pokemon" : "pokeball"}
+          src={image}
+          alt={name}
+          className={image === pokeball ? "pokeball" : "pokemon"}
         />
         <br />
-        <span className={choice.number === 0 ? "hidden" : ""}>
-          #{choice.number}
-        </span>
-        <span> {Capitalize(choice.name)}</span>
+        <span className={number === 0 ? "hidden" : ""}>#{number}</span>
+        <span> {Capitalize(name)}</span>
         <br />
-        {/* #TODO: Typen korrekt darstellen */}
-        {/* <span
-          className="type"
-          style={{ backgroundColor: choice ? bgcolourfirst : "red" }}
-        >
-          {firsttype}
-        </span>
-        <span className="type" style={{ backgroundColor: bgcoloursecond }}>
-          {secondtype}
-        </span> */}
+        <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
+        <br />
         <br />
         <button>Evolve</button>
         <button onClick={RemoveChoice}>Remove</button>
@@ -150,13 +143,15 @@ function App() {
         <span className={number === 0 ? "hidden" : ""}>#{number}</span>
         <span> {Capitalize(name)}</span>
         <br />
+        <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
+        <br />
         <br />
         <button>Evolve</button>
       </div>
     );
   }
 
-  function DisplayTypeButtons() {
+  function DisplayTypeButtons({ firsttype, secondtype }) {
     let bgcolourfirst = colours["colour_type_" + firsttype];
     let bgcoloursecond = colours["colour_type_" + secondtype];
 
@@ -181,7 +176,7 @@ function App() {
           #{number} {Capitalize(name)}
         </span>
         <br />
-        <DisplayTypeButtons />
+        <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
       </div>
     );
   }
@@ -411,9 +406,18 @@ function App() {
       <section className="Teamgenerator">
         <h2>Your team</h2>
         <div className="Teamcards">
-          <DisplayChoice />
+          <DisplayChoice
+            key="choice"
+            name={choice.name}
+            image={choice.image}
+            number={choice.number}
+            firsttype={choice.firsttype}
+            secondtype={choice.secondtype}
+            seclected={choice.selected}
+          />
           {team.map((team) => (
             <CreateTeamcards
+              key={team.id}
               name={team.name}
               image={team.image}
               number={team.number}
