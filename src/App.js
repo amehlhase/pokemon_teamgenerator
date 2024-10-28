@@ -34,109 +34,70 @@ function App() {
     selected: false,
   });
 
-  const [secondchoice, setSecondchoice] = useState({
-    name: "Make a choice",
-    number: 0,
-    image: pokeball,
-    firsttype: "",
-    secondtype: "",
-    selected: false,
-  });
+  // const [secondchoice, setSecondchoice] = useState({
+  //   name: "Make a choice",
+  //   number: 0,
+  //   image: pokeball,
+  //   firsttype: "",
+  //   secondtype: "",
+  //   selected: false,
+  // });
 
-  const [thirdchoice, setThirdchoice] = useState({
-    name: "",
-    number: 0,
-    image: pokeball,
-    firsttype: "",
-    secondtype: "",
-    selected: false,
-  });
+  let initialTeam = [
+    {
+      name: "Make a choice",
+      number: 0,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    },
+    {
+      name: "Make a choice",
+      number: 0,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    },
+    {
+      name: "Make a choice",
+      number: 0,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    },
+    {
+      name: "Make a choice",
+      number: 0,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    },
+    {
+      name: "Make a choice",
+      number: 0,
+      image: pokeball,
+      firsttype: "",
+      secondtype: "",
+    },
+  ];
 
-  const [fourthchoice, setFourthchoice] = useState({
-    name: "",
-    number: 0,
-    image: pokeball,
-    firsttype: "",
-    secondtype: "",
-    selected: false,
-  });
-
-  const [fifthchoice, setFifthchoice] = useState({
-    name: "",
-    number: 0,
-    image: pokeball,
-    firsttype: "",
-    secondtype: "",
-    selected: false,
-  });
-
-  const [sixthchoice, setSixthchoice] = useState({
-    name: "",
-    number: 0,
-    image: pokeball,
-    firsttype: "",
-    secondtype: "",
-    selected: false,
-  });
+  const [team, setTeam] = useState(initialTeam);
 
   function SelectChoice() {
-    !choice.selected
-      ? setChoice((c) => ({
-          ...c,
-          name: name,
-          number: number,
-          image: image,
-          firsttype: firsttype,
-          secondtype: secondtype,
-          selected: true,
-        }))
-      : setSecondchoice((s) => ({
-          ...s,
-          name: name,
-          number: number,
-          image: image,
-          firsttype: firsttype,
-          secondtype: secondtype,
-          selected: true,
-        }));
+    setChoice((c) => ({
+      ...c,
+      name: name,
+      number: number,
+      image: image,
+      firsttype: firsttype,
+      secondtype: secondtype,
+      selected: true,
+    }));
   }
 
-  function RemoveFirstchoice() {
-    if (secondchoice.selected) {
-      setChoice((c) => ({
-        ...c,
-        name: secondchoice.name,
-        number: secondchoice.number,
-        image: secondchoice.image,
-        firsttype: secondchoice.firsttype,
-        secondtype: secondchoice.secondtype,
-        selected: true,
-      }));
-      setSecondchoice((s) => ({
-        ...s,
-        name: "Make a choice",
-        number: 0,
-        image: pokeball,
-        firsttype: "",
-        secondtype: "",
-        selected: false,
-      }));
-    } else {
-      setChoice((c) => ({
-        ...c,
-        name: "Make a choice",
-        number: 0,
-        image: pokeball,
-        firsttype: "",
-        secondtype: "",
-        selected: false,
-      }));
-    }
-  }
-
-  function RemoveSecondchoice() {
-    setSecondchoice((s) => ({
-      ...s,
+  function RemoveChoice() {
+    setChoice((c) => ({
+      ...c,
       name: "Make a choice",
       number: 0,
       image: pokeball,
@@ -172,93 +133,26 @@ function App() {
         </span> */}
         <br />
         <button>Evolve</button>
-        <button onClick={RemoveFirstchoice}>Remove</button>
+        <button onClick={RemoveChoice}>Remove</button>
       </div>
     );
   }
 
-  function DisplaySecondchoice() {
+  function CreateTeamcards({ name, image, number, firsttype, secondtype }) {
     return (
       <div className="Teamcard">
         <img
-          src={secondchoice.image}
-          alt={secondchoice.name}
-          className={secondchoice.selected ? "pokemon" : "pokeball"}
+          src={image}
+          alt={name}
+          className={image === pokeball ? "pokeball" : "pokemon"}
         />
         <br />
-        <span className={secondchoice.number === 0 ? "hidden" : ""}>
-          #{secondchoice.number}
-        </span>
-        <span> {Capitalize(secondchoice.name)}</span>
+        <span className={number === 0 ? "hidden" : ""}>#{number}</span>
+        <span> {Capitalize(name)}</span>
         <br />
         <br />
         <button>Evolve</button>
-        <button onClick={RemoveSecondchoice}>Remove</button>
       </div>
-    );
-  }
-
-  function DisplayGeneratedTeam() {
-    return (
-      <>
-        <div className="Teamcard">
-          <img
-            src={thirdchoice.image}
-            alt={thirdchoice.name}
-            className={thirdchoice.selected ? "pokemon" : "pokeball"}
-          />
-          <br />
-          <span className={thirdchoice.number === 0 ? "hidden" : ""}>
-            #{thirdchoice.number}
-          </span>
-          <span> {Capitalize(thirdchoice.name)}</span>
-          <br />
-          <br />
-        </div>
-        <hr></hr>
-        <div className="Teamcard">
-          <img
-            src={fourthchoice.image}
-            alt={fourthchoice.name}
-            className={fourthchoice.selected ? "pokemon" : "pokeball"}
-          />
-          <br />
-          <span className={fourthchoice.number === 0 ? "hidden" : ""}>
-            #{fourthchoice.number}
-          </span>
-          <span> {Capitalize(fourthchoice.name)}</span>
-          <br />
-          <br />
-        </div>
-        <div className="Teamcard">
-          <img
-            src={fifthchoice.image}
-            alt={fifthchoice.name}
-            className={fifthchoice.selected ? "pokemon" : "pokeball"}
-          />
-          <br />
-          <span className={fifthchoice.number === 0 ? "hidden" : ""}>
-            #{fifthchoice.number}
-          </span>
-          <span> {Capitalize(fifthchoice.name)}</span>
-          <br />
-          <br />
-        </div>
-        <div className="Teamcard">
-          <img
-            src={sixthchoice.image}
-            alt={sixthchoice.name}
-            className={sixthchoice.selected ? "pokemon" : "pokeball"}
-          />
-          <br />
-          <span className={sixthchoice.number === 0 ? "hidden" : ""}>
-            #{sixthchoice.number}
-          </span>
-          <span> {Capitalize(sixthchoice.name)}</span>
-          <br />
-          <br />
-        </div>
-      </>
     );
   }
 
@@ -378,19 +272,10 @@ function App() {
     let result = [];
     const url = "https://pokeapi.co/api/v2/type/";
 
-    if (choice.selected) {
-      types = types.filter(function (e) {
-        return e !== choice.firsttype;
-      });
-      if (secondchoice.selected) {
-        types = types.filter(function (e) {
-          return e !== secondchoice.firsttype && choice.firsttype;
-        });
-        result.push(shuffleArray(types).slice(0, 4));
-      } else {
-        result.push(shuffleArray(types).slice(0, 5));
-      }
-    }
+    types = types.filter(function (e) {
+      return e !== choice.firsttype;
+    });
+    result.push(shuffleArray(types).slice(0, 5));
 
     if (result[0]) {
       for (let i = 0; i < result[0].length; i++) {
@@ -527,11 +412,18 @@ function App() {
         <h2>Your team</h2>
         <div className="Teamcards">
           <DisplayChoice />
-          <DisplaySecondchoice />
-          <DisplayGeneratedTeam />
+          {team.map((team) => (
+            <CreateTeamcards
+              name={team.name}
+              image={team.image}
+              number={team.number}
+              firsttype={team.firsttype}
+              secondtype={team.secondtype}
+            />
+          ))}
         </div>
         <button className="GenerateButton" onClick={GenerateTeam}>
-          Generate new
+          Generate Team
         </button>
       </section>
       <Footer />
