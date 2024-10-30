@@ -276,19 +276,23 @@ function App() {
   }
 
   async function getPokemonurls() {
-    for (let i = 0; i < 5; i++) {
-      axios.get(typeurls[i], {}).then((res) => {
-        const data = res.data;
-        const random = Math.floor(Math.random() * data.pokemon.length);
-        // pokemonurls.push(data.pokemon[random].pokemon.url);
-        setPokemonurls((p) => [...p, data.pokemon[random].pokemon.url]);
-      });
-    }
+    setPokemonurls(
+      await Promise.all(
+        typeurls.map((url) =>
+          axios.get(url).then((res) => {
+            const data = res.data;
+            const random = Math.floor(Math.random() * data.pokemon.length);
+            return data.pokemon[random].pokemon.url;
+          })
+        )
+      )
+    );
+    return pokemonurls;
   }
 
   async function GenerateTeam() {
     if (choice.selected) {
-      setPokemonurls((pokemonurls) => []);
+      setPokemonurls([]);
       await getTypeUrls();
       await getPokemonurls();
 
