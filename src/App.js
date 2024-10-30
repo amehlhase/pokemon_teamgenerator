@@ -13,7 +13,6 @@ import pokeball from "./img/pokeball.png";
 
 function App() {
   let typeurls = [];
-  const [pokemonurls, setPokemonurls] = useState([]);
   const [name, setName] = useState("pikachu");
   const [number, setNumber] = useState(25);
   const [image, setImage] = useState(
@@ -276,25 +275,21 @@ function App() {
   }
 
   async function getPokemonurls() {
-    setPokemonurls(
-      await Promise.all(
-        typeurls.map((url) =>
-          axios.get(url).then((res) => {
-            const data = res.data;
-            const random = Math.floor(Math.random() * data.pokemon.length);
-            return data.pokemon[random].pokemon.url;
-          })
-        )
+    return await Promise.all(
+      typeurls.map((url) =>
+        axios.get(url).then((res) => {
+          const data = res.data;
+          const random = Math.floor(Math.random() * data.pokemon.length);
+          return data.pokemon[random].pokemon.url;
+        })
       )
     );
-    return pokemonurls;
   }
 
   async function GenerateTeam() {
     if (choice.selected) {
-      setPokemonurls([]);
       await getTypeUrls();
-      await getPokemonurls();
+      const pokemonurls = await getPokemonurls();
 
       setTeam([]);
 
@@ -315,25 +310,6 @@ function App() {
       );
 
       setTeam(pokemon);
-
-      // for (let j = 0; j < pokemonurls.length; j++) {
-      //   axios.get(pokemonurls[j]).then((res) => {
-      //     const pokemondata = res.data;
-
-      //     // #TODO: Es wird nur 1 statt 5 Pokemon übertragen??
-
-      //     const pokemon = {
-      //       name: pokemondata.name,
-      //       number: pokemondata.id,
-      //       image: pokemondata.sprites.front_default,
-      //       firsttype: pokemondata.types[0].type.name,
-      //       secondtype: pokemondata.types[1]?.type?.name ?? "",
-      //     };
-
-      //     setTeam([...team, pokemon]);
-      //     console.log(pokemon);
-      //   });
-      // }
     } else {
       window.alert("Please choose at least one Pokémon :)");
     }
