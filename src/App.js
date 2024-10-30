@@ -238,7 +238,7 @@ function App() {
     GetPokemonData(result.name);
   }
 
-  function getTypeUrls() {
+  async function getTypeUrls() {
     typeurls = [];
     let types = [
       "bug",
@@ -275,7 +275,7 @@ function App() {
     return typeurls;
   }
 
-  function getPokemonurls() {
+  async function getPokemonurls() {
     for (let i = 0; i < 5; i++) {
       axios.get(typeurls[i], {}).then((res) => {
         const data = res.data;
@@ -286,35 +286,52 @@ function App() {
     }
   }
 
-  function GenerateTeam() {
+  async function GenerateTeam() {
     if (choice.selected) {
       setPokemonurls((pokemonurls) => []);
-      getTypeUrls();
-      getPokemonurls();
+      await getTypeUrls();
+      await getPokemonurls();
+
+      setTeam([]);
+
+      const pokemon = await Promise.all(
+        pokemonurls.map((url) =>
+          axios.get(url).then((res) => {
+            const pokemondata = res.data;
+            const pokemon = {
+              name: pokemondata.name,
+              number: pokemondata.id,
+              image: pokemondata.sprites.front_default,
+              firsttype: pokemondata.types[0].type.name,
+              secondtype: pokemondata.types[1]?.type?.name ?? "",
+            };
+            return pokemon;
+          })
+        )
+      );
+
+      setTeam(pokemon);
+
+      // for (let j = 0; j < pokemonurls.length; j++) {
+      //   axios.get(pokemonurls[j]).then((res) => {
+      //     const pokemondata = res.data;
+
+      //     // #TODO: Es wird nur 1 statt 5 Pokemon übertragen??
+
+      //     const pokemon = {
+      //       name: pokemondata.name,
+      //       number: pokemondata.id,
+      //       image: pokemondata.sprites.front_default,
+      //       firsttype: pokemondata.types[0].type.name,
+      //       secondtype: pokemondata.types[1]?.type?.name ?? "",
+      //     };
+
+      //     setTeam([...team, pokemon]);
+      //     console.log(pokemon);
+      //   });
+      // }
     } else {
       window.alert("Please choose at least one Pokémon :)");
-    }
-
-    setTeam([]);
-
-    for (let j = 0; j < 5; j++) {
-      axios.get(pokemonurls[j]).then((res) => {
-        const pokemondata = res.data;
-
-        // #TODO: Es wird nur 1 statt 5 Pokemon übertragen??
-        // #TODO: parsed is undefined bei API Call
-
-        const pokemon = {
-          name: pokemondata.name,
-          number: pokemondata.id,
-          image: pokemondata.sprites.front_default,
-          firsttype: pokemondata.types[0].type.name,
-          secondtype: pokemondata.types[1]?.type?.name ?? "",
-        };
-
-        setTeam([...team, pokemon]);
-        console.log(pokemon);
-      });
     }
   }
 
