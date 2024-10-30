@@ -4,13 +4,12 @@ export default function Introduction() {
       <h1>Pokémon Team Generator</h1>
       <p>
         Hi, you have no idea how to put together a great Pokémon team? I got
-        you. Choose your favourite Pokémon, the Pokémon edition you're playing
-        and/or your favourite types and this app generates a banging team for
-        you.
+        you. Choose your favourite Pokémon and this app generates a banging team
+        consisting of 6 different types.
         <br />
-        The suggestions will always be the basic Pokémon but if there's any
-        evolution available just push the evolve button. If the suggested team
-        isn't to your taste, you can generate a new one.
+        Just choose a Pokémon via searchbar or pick a random Pokémon and add it,
+        then generate your team. If the suggested team isn't to your taste, you
+        can generate a new one.
         <br />
         Have fun!
       </p>

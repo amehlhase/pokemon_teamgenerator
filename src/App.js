@@ -23,8 +23,6 @@ function App() {
   const [secondtype, setSecondtype] = useState("");
   // const [evolution, setEvolution] = useState(true);
 
-  const [pokemonarray, setPokemonarray] = useState([]);
-
   const [choice, setChoice] = useState({
     name: "Make a choice",
     number: 0,
@@ -34,7 +32,7 @@ function App() {
     selected: false,
   });
 
-  let initialTeam = [
+  const [team, setTeam] = useState([
     {
       id: 0,
       name: "Make a choice",
@@ -75,9 +73,7 @@ function App() {
       firsttype: "",
       secondtype: "",
     },
-  ];
-
-  const [team, setTeam] = useState(initialTeam);
+  ]);
 
   function SelectChoice() {
     setChoice((c) => ({
@@ -272,65 +268,54 @@ function App() {
     });
     result.push(shuffleArray(types).slice(0, 5));
 
-    if (result[0]) {
-      for (let i = 0; i < result[0].length; i++) {
-        typeurls.push(url + result[0][i]);
-      }
-    } else {
-      window.alert("Please choose at least one Pokémon :)");
+    for (let i = 0; i < result[0].length; i++) {
+      typeurls.push(url + result[0][i]);
     }
 
     return typeurls;
   }
 
   function getPokemonurls() {
-    for (let i = 0; i < typeurls.length; i++) {
+    for (let i = 0; i < 5; i++) {
       axios.get(typeurls[i], {}).then((res) => {
         const data = res.data;
         const random = Math.floor(Math.random() * data.pokemon.length);
-        pokemonurls.push(data.pokemon[random].pokemon.url);
-        // #TODO: parsed is undefined
-        // #TODO: Daten einzelner Pokemon speichern
-        // count? useEffect mit count bis i erreicht?
-        // axios.get(pokemonurls[i]).then((res) => {
-        //   const pokemondata = res.data;
-        //   setPokemonarray([...pokemonarray, { name: pokemondata.name }]);
-        // });
+        // pokemonurls.push(data.pokemon[random].pokemon.url);
+        setPokemonurls((p) => [...p, data.pokemon[random].pokemon.url]);
       });
     }
   }
 
   function GenerateTeam() {
-    setPokemonurls([]);
-    setPokemonarray([]);
-    getTypeUrls();
-    getPokemonurls();
+    if (choice.selected) {
+      setPokemonurls((pokemonurls) => []);
+      getTypeUrls();
+      getPokemonurls();
+    } else {
+      window.alert("Please choose at least one Pokémon :)");
+    }
 
-    console.log(pokemonarray);
+    setTeam([]);
 
-    // for (let i = 0; i < pokemonurls.length; i++) {
-    //   axios.get(pokemonurls[i], {}).then((res) => {
-    //     const data = res.data;
-    //     console.log(data);
+    for (let j = 0; j < 5; j++) {
+      axios.get(pokemonurls[j]).then((res) => {
+        const pokemondata = res.data;
 
-    //     // setName(data.name);
-    //     // setNumber(data.id);
-    //     // setImage(data.sprites.front_default);
-    //     // setFirsttype(data.types[0].type.name);
-    //     // setSecondtype(data.types[1]?.type?.name ?? "");
-    //   });
+        // #TODO: Es wird nur 1 statt 5 Pokemon übertragen??
+        // #TODO: parsed is undefined bei API Call
 
-    //   // if(pokemonurls.length > 4) {
-    //   //   setSecondchoice((s) => ({
-    //   //     ...s,
-    //   //     name: ,
-    //   //     number: 0,
-    //   //     image: pokeball,
-    //   //     firsttype: "",
-    //   //     secondtype: "",
-    //   //     selected: false,
-    //   //   }));
-    // }
+        const pokemon = {
+          name: pokemondata.name,
+          number: pokemondata.id,
+          image: pokemondata.sprites.front_default,
+          firsttype: pokemondata.types[0].type.name,
+          secondtype: pokemondata.types[1]?.type?.name ?? "",
+        };
+
+        setTeam([...team, pokemon]);
+        console.log(pokemon);
+      });
+    }
   }
 
   return (
@@ -344,13 +329,11 @@ function App() {
           value="Random Pokémon"
           onClick={PickRandomPokemon}
         />
-
         <DisplayPokemon />
         <br />
         <input type="button" value="Add to team" onClick={SelectChoice} />
         {/* <input type="button" value="Evolve choice" /> */}
         <br />
-
         {/* <label htmlFor="">
           Edition:
          
@@ -395,11 +378,8 @@ function App() {
           </select>
           <br />
         </label> */}
-
         {/* <label htmlFor="">Types (tbd)</label> */}
-
         {/* https://react.tips/checkboxes-in-react-16/ */}
-
         {/* <button className="GenerateButton">Generate team!</button> */}
       </section>
 
