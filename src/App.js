@@ -20,7 +20,6 @@ function App() {
   );
   const [firsttype, setFirsttype] = useState("electric");
   const [secondtype, setSecondtype] = useState("");
-  // const [evolution, setEvolution] = useState(true);
 
   const [choice, setChoice] = useState({
     name: "Make a choice",
@@ -98,14 +97,7 @@ function App() {
     }));
   }
 
-  function DisplayChoice({
-    name,
-    image,
-    number,
-    firsttype,
-    secondtype,
-    selected,
-  }) {
+  function DisplayChoice({ name, image, number, firsttype, secondtype }) {
     return (
       <div className="Teamcard">
         <img
@@ -120,7 +112,6 @@ function App() {
         <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
         <br />
         <br />
-        <button>Evolve</button>
         <button onClick={RemoveChoice}>Remove</button>
       </div>
     );
@@ -141,7 +132,6 @@ function App() {
         <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
         <br />
         <br />
-        <button>Evolve</button>
       </div>
     );
   }
