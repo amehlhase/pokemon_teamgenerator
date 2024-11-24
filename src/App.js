@@ -112,7 +112,9 @@ function App() {
         <DisplayTypeButtons firsttype={firsttype} secondtype={secondtype} />
         <br />
         <br />
-        <button onClick={RemoveChoice}>Remove</button>
+        <button onClick={RemoveChoice} className={number === 0 ? "hidden" : ""}>
+          Remove
+        </button>
       </div>
     );
   }
