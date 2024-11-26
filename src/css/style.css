@@ -48,7 +48,7 @@ h4 {
 .App {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 1fr 2fr 0.3fr;
+  grid-template-rows: 0.5fr 1fr 1.7fr 0.3fr;
   grid-template-areas: "introduction" "pokemonchoice" "teamgenerator" "footer";
 }
 .App .Introduction {
@@ -65,8 +65,8 @@ h4 {
 }
 @media (min-width: 750px) {
   .App {
-    grid-template-columns: 0.5fr 1.5fr;
-    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 3fr 1fr;
     grid-template-areas: "introduction introduction" "pokemonchoice teamgenerator" "footer footer";
   }
   .App .Pokemonchoice {
@@ -81,10 +81,14 @@ h4 {
   padding: 10px;
 }
 .App .Pokemonchoice {
-  padding: 10px;
+  margin: auto;
+  padding: 20px;
 }
 .App .Pokemonchoice img {
-  width: 200px;
+  width: 220px;
+}
+.App .Pokemonchoice button {
+  text-align: center;
 }
 .App .Teamgenerator {
   padding: 10px;
@@ -94,7 +98,7 @@ h4 {
   flex-flow: wrap;
   justify-content: center;
   align-items: baseline;
-  margin: 10px;
+  margin: 5px;
 }
 @media (min-width: 750px) {
   .App .Teamgenerator .Teamcards hr {
@@ -108,14 +112,14 @@ h4 {
   }
 }
 .App .Teamgenerator .Teamcards .Teamcard {
-  margin: 15px;
+  margin: 5px;
 }
 .App .Teamgenerator .Teamcards .Teamcard img.pokeball {
-  height: 80px;
+  height: 100px;
   opacity: 50%;
 }
 .App .Teamgenerator .Teamcards .Teamcard img.pokemon {
-  height: 200px;
+  height: 150px;
 }
 
 footer {

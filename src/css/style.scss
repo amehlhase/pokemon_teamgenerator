@@ -22,8 +22,6 @@
 
 .App {
 
-  // Grid Design:
-
   display: grid;
 
   .Introduction {
@@ -43,8 +41,8 @@
   }
 
   @media (min-width: $mq_mobile) {
-    grid-template-columns: 0.5fr 1.5fr; 
-    grid-template-rows: 1fr 2fr 1fr; 
+    grid-template-columns: 1fr 2fr; 
+    grid-template-rows: 1fr 3fr 1fr; 
     grid-template-areas: 
     "introduction introduction"
     "pokemonchoice teamgenerator"
@@ -55,7 +53,7 @@
     }
   }
     grid-template-columns: 1fr; 
-    grid-template-rows: 0.5fr 1fr 2fr 0.3fr; 
+    grid-template-rows: 0.5fr 1fr 1.7fr 0.3fr; 
     grid-template-areas: 
     "introduction"
     "pokemonchoice"
@@ -79,10 +77,15 @@
 
     .Pokemonchoice {
 
-      padding: 10px;
+      margin: auto;
+      padding: 20px;
 
         img {
-          width: 200px;
+          width: 220px;
+        }
+
+        button {
+          text-align: center;
         }
     }
 
@@ -98,7 +101,7 @@
         flex-flow: wrap;
         justify-content: center;
         align-items: baseline;
-        margin: 10px;
+        margin: 5px;
 
           @media (min-width: $mq_mobile) {
             hr {
@@ -114,17 +117,15 @@
           }
 
         .Teamcard {
-          margin: 15px;
-
-          // #TODO: Cards stylen und korrekt ausrichten
+          margin: 5px;
 
           img.pokeball {
-              height: 80px;
+              height: 100px;
               opacity: 50%;
             }
 
           img.pokemon {
-              height: 200px;
+              height: 150px;
             }
             
           }

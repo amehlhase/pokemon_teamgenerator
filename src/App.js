@@ -33,7 +33,7 @@ function App() {
   const [team, setTeam] = useState([
     {
       id: 0,
-      name: "Make a choice",
+      name: "",
       number: 0,
       image: pokeball,
       firsttype: "",
@@ -41,7 +41,7 @@ function App() {
     },
     {
       id: 1,
-      name: "Make a choice",
+      name: "",
       number: 0,
       image: pokeball,
       firsttype: "",
@@ -49,7 +49,7 @@ function App() {
     },
     {
       id: 2,
-      name: "Make a choice",
+      name: "",
       number: 0,
       image: pokeball,
       firsttype: "",
@@ -57,7 +57,7 @@ function App() {
     },
     {
       id: 3,
-      name: "Make a choice",
+      name: "",
       number: 0,
       image: pokeball,
       firsttype: "",
@@ -65,7 +65,7 @@ function App() {
     },
     {
       id: 4,
-      name: "Make a choice",
+      name: "",
       number: 0,
       image: pokeball,
       firsttype: "",
@@ -373,7 +373,7 @@ function App() {
       </section>
 
       <section className="Teamgenerator">
-        <h2>Your team</h2>
+        <h2>Your Team:</h2>
         <div className="Teamcards">
           <DisplayChoice
             key="choice"
